@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Förderverein Kita Burgwiese Mehren e.V.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --green: #2d8a44; --orange: #f29400; --light: #f8f9fa; --dark: #2c3e50; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* Navigation mit großem Logo links */
+        nav { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; text-decoration: none; }
+        .logo-area img { height: 120px; width: auto; margin-right: 20px; } 
+        .brand-name { color: var(--green); font-weight: bold; font-size: 1.5rem; line-height: 1.2; }
+
+        .nav-links a { text-decoration: none; color: var(--dark); margin-left: 25px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--green); }
+
+        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('fussball.png'); background-size: cover; background-position: center; color: white; padding: 100px 10%; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+
+        section { padding: 80px 10%; }
+        .section-title { text-align: center; color: var(--green); font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; width: 80px; height: 4px; background: var(--orange); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 50px; text-align: center; }
+        .stat-item span { font-size: 4rem; font-weight: bold; display: block; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 6px solid var(--green); text-align: center; padding: 30px; transition: 0.3s; }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; cursor: pointer; }
+
+        .form-container { background: var(--light); padding: 50px; border-radius: 30px; max-width: 800px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; }
+        input, select { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
+        .btn-submit { background: var(--orange); color: white; padding: 20px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.2rem; margin-top: 20px; transition: 0.3s; }
+        
+        .paypal-area { text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #ddd; }
+        .paypal-btn { background: #0070ba; color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,112,186,0.3); transition: 0.3s; }
+        .paypal-btn:hover { transform: scale(1.05); background: #005ea6; }
+
+        #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+
+        footer { background: var(--dark); color: white; padding: 60px 10%; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+    </style>
+</head>
+<body>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+
+<nav>
+    <a href="index.html" class="logo-area">
+        <img src="logo.jpeg" alt="Logo">
+        <span class="brand-name">Förderverein Kita<br>Burgwiese Mehren e.V.</span>
+    </a>
+    <div class="nav-links">
+        <a href="#projekte">Projekte</a>
+        <a href="#vorstand">Vorstand</a>
+        <a href="sponsoren.html">Sponsoren</a>
+        <a href="#mitglied" style="background: var(--orange); color: white; padding: 12px 25px; border-radius: 30px;">Mitglied werden</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Hand in Hand für unsere Kinder</h1>
+    <p>57635 Mehren im Westerwald</p>
+</section>
+
+<div class="stats">
+    <div class="stat-item"><span class="count" data-target="7">0</span>Mitglieder</div>
+    <div class="stat-item"><span class="count" data-target="250">0</span>Spenden (€)</div>
+    <div class="stat-item"><span class="count" data-target="12">0</span>Projekte</div>
+</div>
+
+<section id="projekte">
+    <h2 class="section-title">Unsere Projekte</h2>
+    <div class="grid">
+        <div class="card"><img src="tonwanne.png" onclick="openLightbox(this.src)"><h3>Tonwanne</h3><p>Haptisches Erleben.</p></div>
+        <div class="card"><img src="1.jpeg" onclick="openLightbox(this.src)"><h3>Satzung</h3><p>Unsere Ziele.</p></div>
+        <div class="card"><img src="2.jpeg" onclick="openLightbox(this.src)"><h3>Zukunft</h3><p>Kita-Alltag gestalten.</p></div>
+    </div>
+</section>
+
+<section id="vorstand" style="background: var(--light);">
+    <h2 class="section-title">Unser Vorstand</h2>
+    <div class="grid">
+        <div class="card"><i class="fas fa-user-tie fa-4x" style="color:var(--green); margin-bottom:15px;"></i><h3>Benjamin Strehl</h3><p>1. Vorsitzender</p></div>
+        <div class="card"><i class="fas fa-user fa-4x" style="color:var(--green); margin-bottom:15px;"></i><h3>Dennis Dei</h3><p>2. Vorsitzender</p></div>
+        <div class="card"><i class="fas fa-coins fa-4x" style="color:var(--green); margin-bottom:15px;"></i><h3>Claudius Bruhns</h3><p>Kassierer</p></div>
+    </div>
+</section>
+
+<section id="mitglied">
+    <h2 class="section-title">Mitgliedschaft & Spende</h2>
+    <div class="form-container">
+        <form action="https://formspree.io/f/DEINE_ID" method="POST">
+            <h3 style="color:var(--green); margin-top:0; text-align:center;">Jetzt digital beitreten</h3>
+            <div class="form-group"><label>Name, Vorname</label><input type="text" name="name" required></div>
+            <div class="form-group"><label>Straße, Hausnummer</label><input type="text" name="adresse" required></div>
+            <div class="form-group"><label>PLZ / Ort</label><input type="text" name="plz_ort" value="57635 Mehren" required></div>
+            <div class="form-group"><label>E-Mail Adresse</label><input type="email" name="email" required></div>
+            <div class="form-group">
+                <label>Kategorie</label>
+                <select name="beitrag">
+                    <option value="12">Basismitglied (12 € / Jahr)</option>
+                    <option value="24">Förderer (24 € / Jahr)</option>
+                    <option value="50">Premium (50 € / Jahr)</option>
+                    <option value="wunsch">Wunschbetrag</option>
+                </select>
+            </div>
+            <div class="form-group"><label>IBAN für Lastschrift</label><input type="text" name="iban" placeholder="DE.. .... .... .... .... .."></div>
+            <button type="submit" class="btn-submit">Antrag jetzt absenden</button>
+        </form>
+
+        <div class="paypal-area">
+            <h3>Einmalige Spende</h3>
+            <p>Unterstützen Sie uns direkt via PayPal:</p>
+            <a href="https://www.paypal.me/DEIN_PAYPAL_NAME" target="_blank" class="paypal-btn">
+                <i class="fab fa-paypal"></i> Jetzt spenden
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h4>Impressum</h4>
+            <p>Förderverein Kita Burgwiese Mehren e.V.<br>
+            57635 Mehren<br>
+            Amtsgericht Altenkirchen | VR [Nummer]</p>
+        </div>
+        <div>
+            <h4>Bankverbindung</h4>
+            <p>Sparkasse Westerwald-Sieg<br>IBAN: [Deine IBAN]<br>BIC: [Deine BIC]</p>
+        </div>
+        <div>
+            <h4>Kontakt</h4>
+            <p>info@kita-burgwiese-mehren.de</p>
+        </div>
+    </div>
+    <p style="margin-top:40px; opacity:0.5; text-align:center;">&copy; 2026 Förderverein Kita Burgwiese Mehren e.V.</p>
+</footer>
+
+<script>
+    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+    const counters = document.querySelectorAll('.count');
+    const observer = new IntersectionObserver(entries => {
+        if(entries[0].isIntersecting) {
+            counters.forEach(c => {
+                const update = () => {
+                    const target = +c.getAttribute('data-target');
+                    const val = +c.innerText;
+                    if(val < target) { c.innerText = Math.ceil(val + target/40); setTimeout(update, 50); } else { c.innerText = target; }
+                };
+                update();
+            });
+        }
+    }, { threshold: 0.5 });
+    observer.observe(document.querySelector('.stats'));
+</script>
+</body>
+</html>
