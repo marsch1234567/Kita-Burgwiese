@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main # Hier deinen Branch-Namen eintragen (meist main oder master)
+
+media_folder: "images" # Ordner, in dem Bilder gespeichert werden
+public_folder: "/images"
+
+collections:
+  - name: "einstellungen"
+    label: "Allgemeine Einstellungen"
+    files:
+      - name: "kontaktdaten"
+        label: "Kontakt & Adresse"
+        file: "_data/kontakt.json"
+        fields:
+          - {label: "Vereinsname", name: "name", widget: "string"}
+          - {label: "Straße & Hausnummer", name: "strasse", widget: "string"}
+          - {label: "PLZ", name: "plz", widget: "string"}
+          - {label: "Ort", name: "ort", widget: "string"}
+          - {label: "E-Mail Adresse", name: "email", widget: "string"}
+          - {label: "IBAN", name: "iban", widget: "string"}
+
+  - name: "projekte"
+    label: "Projekte"
+    folder: "_projekte"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titel", name: "title", widget: "string"}
+      - {label: "Kurzbeschreibung", name: "description", widget: "text"}
+      - {label: "Beitragsbild", name: "image", widget: "image"}
+      - {label: "Inhalt", name: "body", widget: "markdown"}
