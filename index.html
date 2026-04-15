@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Förderverein Kita Burgwiese Mehren e.V.</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --green: #2d8a44; --orange: #f29400; --light: #f8f9fa; --dark: #2c3e50; }
@@ -19,23 +20,34 @@
 
         .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('fussball.png'); background-size: cover; background-position: center; color: white; padding: 100px 10%; text-align: center; }
         
+        /* ZÄHLER STYLING */
+        .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 50px; text-align: center; flex-wrap: wrap; }
+        .stat-item { padding: 20px; min-width: 200px; }
+        .stat-item span { font-size: 4rem; font-weight: bold; display: block; line-height: 1; margin-bottom: 10px; }
+
         section { padding: 80px 10%; }
         .section-title { text-align: center; color: var(--green); font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; width: 80px; height: 4px; background: var(--orange); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 25px; text-align: center; border-top: 6px solid var(--green); }
-        .card img { width: 100%; border-radius: 10px; cursor: pointer; }
+        .card img { width: 100%; border-radius: 10px; cursor: pointer; height: 200px; object-fit: cover; }
 
         .form-container { background: var(--light); padding: 40px; border-radius: 30px; max-width: 850px; margin: auto; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
         
-        .donation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: center; border-top: 1px solid #ddd; padding-top: 30px; }
+        .donation-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; align-items: center; border-top: 1px solid #ddd; padding-top: 30px; }
         .qr-code { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 180px; margin: auto; }
 
         footer { background: var(--dark); color: white; padding: 60px 10%; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px; text-align: center; opacity: 0.6; }
+
+        #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -59,12 +71,18 @@
     <p>Zur Burgwiese 1, 57635 Mehren</p>
 </section>
 
+<div class="stats">
+    <div class="stat-item"><span class="count" data-target="7">0</span>Mitglieder</div>
+    <div class="stat-item"><span class="count" data-target="250">0</span>Spenden (€)</div>
+    <div class="stat-item"><span class="count" data-target="12">0</span>Projekte</div>
+</div>
+
 <section id="projekte">
     <h2 class="section-title">Unsere Projekte</h2>
     <div class="grid">
-        <div class="card"><img src="tonwanne.png"><h3>Tonwanne</h3><p>Haptik & Kreativität.</p></div>
-        <div class="card"><img src="fussball.png"><h3>KiTa Cup 2026</h3><p>Wir trainieren bereits!</p></div>
-        <div class="card"><i class="fas fa-plus fa-3x" style="color: #ccc; margin: 20px 0;"></i><h3>Dein Projekt?</h3><p>Werde Teil des Teams.</p></div>
+        <div class="card"><img src="tonwanne.png" onclick="openLightbox(this.src)"><h3>Tonwanne</h3><p>Haptik & Kreativität.</p></div>
+        <div class="card"><img src="fussball.png" onclick="openLightbox(this.src)"><h3>KiTa Cup 2026</h3><p>Wir trainieren bereits!</p></div>
+        <div class="card"><img src="2.jpeg" onclick="openLightbox(this.src)"><h3>Zukunft</h3><p>Kita-Alltag aktiv gestalten.</p></div>
     </div>
 </section>
 
@@ -72,106 +90,11 @@
     <h2 class="section-title">Mitgliedschaft & Spende</h2>
     <div class="form-container">
         <form action="https://formspree.io/f/foerderverein@kita-mehren.de" method="POST">
-    <h3 style="color:var(--green); margin-top:0;">Mitgliedsantrag online einreichen</h3>
-    
-    <input type="hidden" name="_subject" value="Neuer Mitgliedsantrag: Kita Burgwiese">
-    
-    <div style="background: #eef5ef; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem;">
-        <strong>Zahlungshinweis:</strong> Der Erstbeitrag wird sofort fällig, Folgebeiträge jeweils zum Jahresanfang im Januar.
-    </div>
-
-    <div class="form-group">
-        <label>Vollständiger Name</label>
-        <input type="text" name="Name" placeholder="Vorname Nachname" required>
-    </div>
-
-    <div class="form-group">
-        <label>Straße und Hausnummer</label>
-        <input type="text" name="Strasse_Hausnummer" placeholder="Musterstraße 123" required>
-    </div>
-
-    <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 10px;">
-        <div>
-            <label>PLZ</label>
-            <input type="text" name="PLZ" value="57635" required>
-        </div>
-        <div>
-            <label>Ort</label>
-            <input type="text" name="Ort" value="Mehren" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>E-Mail Adresse</label>
-        <input type="email" name="_replyto" placeholder="ihre@email.de" required>
-    </div>
-
-    <div class="form-group">
-        <label>Gewünschter Jahresbeitrag</label>
-        <select name="Mitgliedschaft_Typ">
-            <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)</option>
-            <option value="Basis (12€)">Basismitglied (12 € / Jahr)</option>
-            <option value="Premium (50€)">Premium (50 € / Jahr)</option>
-            <option value="Wunschbetrag">Wunschbetrag (bitte unten angeben)</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>Deine IBAN (für Lastschrift)</label>
-        <input type="text" name="IBAN" placeholder="DE12 3456 ..." required style="border: 2px solid var(--green);">
-    </div>
-
-    <div style="font-size: 0.8rem; color: #555; margin-top: 15px;">
-        <label>
-            <input type="checkbox" name="DSGVO_Akzeptiert" required> 
-            Ich akzeptiere die Speicherung meiner Daten zum Zwecke der Vereinsverwaltung und erteile das SEPA-Lastschriftmandat.
-        </label>
-    </div>
-    
-    <button type="submit" class="btn-submit" style="margin-top: 20px;">Antrag jetzt sicher senden</button>
-</form>
-
-        <div class="donation-split">
-            <div style="text-align: center;">
-                <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
-                <p>Einfach scannen & unterstützen:</p>
-                <div class="qr-code">
-                    <img src="qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
-                </div>
+            <h3 style="color:var(--green); margin-top:0;">Mitgliedsantrag online einreichen</h3>
+            <input type="hidden" name="_subject" value="Neuer Mitgliedsantrag: Kita Burgwiese">
+            
+            <div style="background: #eef5ef; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem;">
+                <i class="fas fa-calendar-check"></i> <strong>Zahlungshinweis:</strong> Der Erstbeitrag wird sofort nach Bearbeitung fällig, Folgebeiträge jeweils zum Jahresanfang im Januar.
             </div>
-            <div style="text-align: left; padding-left: 20px;">
-                <h4 style="color:var(--green);">Ansprechpartner</h4>
-                <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>
-                <i class="fas fa-envelope"></i> foerderverein@kita-mehren.de</p>
-            </div>
-        </div>
-    </div>
-</section>
 
-<footer>
-    <div class="footer-grid">
-        <div>
-            <h4>Anschrift</h4>
-            <p>Förderverein Kita Burgwiese e.V.<br>
-            Zur Burgwiese 1<br>
-            57635 Mehren</p>
-        </div>
-        <div>
-            <h4>Bankverbindung</h4>
-            <p><strong>Sparkasse Westerwald-Sieg</strong><br>
-            IBAN: DE18 5735 1030 0055 0944 94<br>
-            BIC: MALADE51AKI</p>
-        </div>
-        <div>
-            <h4>Rechtliches</h4>
-            <p><a href="#datenschutz" style="color: white;">Datenschutzerklärung</a><br>
-            AG Altenkirchen | VR [Nummer]</p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2026 Förderverein Kita Burgwiese Mehren e.V. | <a href="#impressum" style="color: #aaa;">Impressum</a>
-    </div>
-</footer>
-
-</body>
-</html>
+            <div class="form-group"><label>
