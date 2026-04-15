@@ -97,4 +97,105 @@
                 <i class="fas fa-calendar-check"></i> <strong>Zahlungshinweis:</strong> Der Erstbeitrag wird sofort nach Bearbeitung fällig, Folgebeiträge jeweils zum Jahresanfang im Januar.
             </div>
 
-            <div class="form-group"><label>
+            <div class="form-group"><label>Vollständiger Name</label><input type="text" name="Name" required></div>
+            <div class="form-group"><label>Straße und Hausnummer</label><input type="text" name="Strasse" required></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
+                <div class="form-group"><label>PLZ</label><input type="text" name="PLZ" value="57635" required></div>
+                <div class="form-group"><label>Ort</label><input type="text" name="Ort" value="Mehren" required></div>
+            </div>
+
+            <div class="form-group"><label>E-Mail Adresse</label><input type="email" name="_replyto" required></div>
+
+            <div class="form-group">
+                <label>Gewünschter Jahresbeitrag</label>
+                <select name="Beitrag">
+                    <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)</option>
+                    <option value="Basis (12€)">Basismitglied (12 € / Jahr)</option>
+                    <option value="Premium (50€)">Premium (50 € / Jahr)</option>
+                    <option value="Wunsch">Wunschbetrag</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>IBAN (für Lastschriftmandat)</label>
+                <input type="text" name="IBAN" placeholder="DE18 5735 ..." required style="border: 2px solid var(--green);">
+            </div>
+
+            <div style="font-size: 0.8rem; margin: 20px 0;">
+                <label><input type="checkbox" required> Ich akzeptiere die Datenschutzbestimmungen und erteile das SEPA-Lastschriftmandat.</label>
+            </div>
+            
+            <button type="submit" class="btn-submit">Antrag jetzt sicher senden</button>
+        </form>
+
+        <div class="donation-split">
+            <div style="text-align: center;">
+                <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
+                <div class="qr-code"><img src="qr-paypal.png" alt="PayPal QR Code" style="width: 100%;"></div>
+            </div>
+            <div style="text-align: left; padding-left: 20px;">
+                <h4 style="color:var(--green);">Ansprechpartner</h4>
+                <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>
+                <i class="fas fa-envelope"></i> foerderverein@kita-mehren.de</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h4>Anschrift</h4>
+            <p>Förderverein Kita Burgwiese e.V.<br>Zur Burgwiese 1<br>57635 Mehren</p>
+        </div>
+        <div>
+            <h4>Bankverbindung</h4>
+            <p><strong>Sparkasse Westerwald-Sieg</strong><br>IBAN: DE18 5735 1030 0055 0944 94</p>
+        </div>
+        <div>
+            <h4>Rechtliches</h4>
+            <p><a href="#datenschutz" style="color: white;">Datenschutz</a> | <a href="#impressum" style="color: white;">Impressum</a><br>AG Altenkirchen | VR [Nummer]</p>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Förderverein Kita Burgwiese Mehren e.V.</div>
+</footer>
+
+<script>
+    // Lightbox Funktion
+    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+    
+    // ZÄHLER LOGIK
+    const counters = document.querySelectorAll('.count');
+    const observer = new IntersectionObserver(entries => {
+        if(entries[0].isIntersecting) {
+            counters.forEach(c => {
+                const update = () => {
+                    const target = +c.getAttribute('data-target');
+                    const val = +c.innerText;
+                    if(val < target) { 
+                        c.innerText = Math.ceil(val + target/50); 
+                        setTimeout(update, 30); 
+                    } else { 
+                        c.innerText = target; 
+                    }
+                };
+                update();
+            });
+        }
+    }, { threshold: 0.5 });
+    observer.observe(document.querySelector('.stats'));
+
+    // Netlify Identity Redirect
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>
