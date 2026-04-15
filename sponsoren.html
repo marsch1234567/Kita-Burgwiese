@@ -22,7 +22,19 @@
         .container { padding: 60px 10%; max-width: 1000px; margin: auto; }
         .sponsor-card { background: white; border-radius: 25px; padding: 40px; display: flex; align-items: center; gap: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 40px; border-left: 10px solid var(--orange); }
         
-        .sponsor-logo-img { width: 180px; height: auto; border-radius: 10px; }
+        /* LOGO STYLING MIT HOVER-EFFEKT */
+        .sponsor-logo-img { 
+            width: 180px; 
+            height: auto; 
+            border-radius: 10px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        
+        /* Effekt beim Drüberfahren */
+        .sponsor-logo-img:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
         
         .sponsor-info h2 { color: var(--green); margin: 0 0 10px 0; font-size: 2rem; }
         .sponsor-info p { color: #555; font-size: 1.1rem; }
@@ -48,23 +60,28 @@
 
 <header>
     <h1>Unsere Partner & Sponsoren</h1>
-    <p>Dank eurer Hilfe können wir Großes für die Kleinen bewegen.</p>
+    <p>Engagement, das einen Unterschied macht.</p>
 </header>
 
 <div class="container">
     
     <div class="sponsor-card">
-        <img src="Logo-Baerenstark.png" alt="Logo Ambulanter Pflegedienst BAERenstark" class="sponsor-logo-img">
+        <a href="https://www.baerenstark-pflegedienst.de/" target="_blank">
+            <img src="Logo-Baerenstark.png" alt="Logo Ambulanter Pflegedienst BAERenstark" class="sponsor-logo-img">
+        </a>
         <div class="sponsor-info">
             <h2>Ambulanter Pflegedienst BAERenstark</h2>
             <p>Ein herzliches Dankeschön an das Team von BAERenstark für die wertvolle Unterstützung unserer Vereinsarbeit und die Förderung der Kinder in Mehren.</p>
+            <p><a href="https://www.baerenstark-pflegedienst.de/" target="_blank" class="mail-link" style="font-size: 0.9rem;">
+                <i class="fas fa-external-link-alt"></i> Zur Website des Sponsors
+            </a></p>
         </div>
     </div>
 
     <div class="contact-box">
         <i class="fas fa-handshake fa-3x" style="color: var(--orange); margin-bottom: 20px;"></i>
         <h3>Werden auch Sie Sponsor!</h3>
-        <p>Präsentieren Sie Ihr Unternehmen und unterstützen Sie gleichzeitig eine gute Sache.</p>
+        <p>Unterstützen Sie uns dabei, die Kita-Zeit für unsere Kinder noch schöner zu machen.</p>
         <p>Kontaktieren Sie uns einfach unter:<br>
             <a href="mailto:foerderverein@kita-mehren.de?subject=Anfrage%20Sponsoring%20Kita%20Burgwiese" class="mail-link">
                 <i class="fas fa-envelope"></i> foerderverein@kita-mehren.de
@@ -74,7 +91,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Förderverein Kita Burgwiese Mehren e.V. | <a href="impressum.html" style="color:white;">Impressum</a></p>
+    <p>&copy; 2026 Förderverein Kita Burgwiese Mehren e.V. | <a href="impressum.html" style="color:white;">Impressum</a> | <a href="datenschutz.html" style="color:white;">Datenschutz</a></p>
 </footer>
 
 </body>
