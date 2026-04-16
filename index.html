@@ -7,35 +7,75 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="projekte.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root { --green: #2d8a44; --orange: #f29400; --light: #f8f9fa; --dark: #2c3e50; }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
-        nav { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        
+        /* Navigation - Desktop & Mobile Optimierung */
+        nav { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-area { display: flex; align-items: center; text-decoration: none; }
-        .logo-area img { height: 120px; width: auto; margin-right: 20px; } 
-        .brand-name { color: var(--green); font-weight: bold; font-size: 1.5rem; line-height: 1.2; }
-        .nav-links a { text-decoration: none; color: var(--dark); margin-left: 25px; font-weight: 600; transition: 0.3s; }
+        .logo-area img { height: 80px; width: auto; margin-right: 15px; } 
+        .brand-name { color: var(--green); font-weight: bold; font-size: 1.3rem; line-height: 1.2; }
+
+        .nav-links { display: flex; align-items: center; gap: 15px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; padding: 8px 15px; transition: 0.3s; }
         .nav-links a:hover { color: var(--green); }
-        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('fussball.png'); background-size: cover; background-position: center; color: white; padding: 100px 10%; text-align: center; }
-        .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 50px; text-align: center; flex-wrap: wrap; }
-        .stat-item span { font-size: 4rem; font-weight: bold; display: block; }
-        section { padding: 80px 10%; }
-        .section-title { text-align: center; color: var(--green); font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        .btn-nav { background: var(--orange); color: white !important; border-radius: 25px; }
+
+        /* Hero mit korrektem Bildpfad */
+        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('bilder/fussball.png'); background-size: cover; background-position: center; color: white; padding: 80px 10%; text-align: center; }
+        
+        /* Statistik-Zähler */
+        .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 40px; text-align: center; flex-wrap: wrap; }
+        .stat-item { padding: 10px; min-width: 150px; }
+        .stat-item span { font-size: 3.5rem; font-weight: bold; display: block; line-height: 1; }
+
+        /* Sektionen & Grid */
+        section { padding: 60px 10%; }
+        .section-title { text-align: center; color: var(--green); font-size: 2.2rem; margin-bottom: 40px; position: relative; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 25px; text-align: center; border-top: 6px solid var(--green); }
+        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 25px; text-align: center; border-top: 6px solid var(--green); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
         .card img { width: 100%; border-radius: 10px; height: 200px; object-fit: cover; cursor: pointer; }
-        .form-container { background: var(--light); padding: 40px; border-radius: 30px; max-width: 850px; margin: auto; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; }
-        .donation-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px; }
+
+        /* Formular */
+        .form-container { background: var(--light); padding: 30px; border-radius: 30px; max-width: 800px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #d68300; }
+
+        /* PayPal & Kontakt */
+        .donation-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px; }
         .qr-area { text-align: center; }
-        .qr-code-link { display: inline-block; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 180px; transition: 0.3s; }
+        .qr-code-link { display: inline-block; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 160px; transition: 0.3s; text-decoration: none; }
         .qr-code-link:hover { transform: scale(1.05); }
+
+        /* Footer */
         footer { background: var(--dark); color: white; padding: 60px 10%; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px; text-align: center; opacity: 0.6; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px; text-align: center; opacity: 0.7; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Lightbox */
         #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
         #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+
+        /* MOBILE ANPASSUNGEN (Wichtig!) */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 15px; text-align: center; }
+            .logo-area { margin-bottom: 15px; }
+            .logo-area img { height: 60px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-links a { font-size: 0.85rem; padding: 6px 12px; background: #f0f0f0; border-radius: 15px; margin-left: 0; }
+            .btn-nav { background: var(--orange) !important; color: white !important; }
+            .stats { padding: 30px 5%; }
+            .stat-item span { font-size: 2.5rem; }
+            section { padding: 40px 5%; }
+        }
     </style>
 </head>
 <body>
@@ -44,13 +84,13 @@
 
 <nav>
     <a href="index.html" class="logo-area">
-        <img src="logo.jpeg" alt="Logo">
+        <img src="bilder/logo.jpeg" alt="Logo">
         <span class="brand-name">Förderverein Kita<br>Burgwiese Mehren e.V.</span>
     </a>
     <div class="nav-links">
         <a href="#projekte">Projekte</a>
         <a href="sponsoren.html">Sponsoren</a>
-        <a href="#mitglied" style="background: var(--orange); color: white; padding: 10px 20px; border-radius: 25px;">Beitreten</a>
+        <a href="#mitglied" class="btn-nav">Beitreten</a>
     </div>
 </nav>
 
@@ -122,14 +162,14 @@
             <div style="font-size: 0.8rem; margin: 20px 0;">
                 <label>
                     <input type="checkbox" name="Zustimmung_Datenschutz" required> 
-                    Ich akzeptiere die <a href="datenschutz.html">Datenschutzbestimmungen</a> und erteile das SEPA-Lastschriftmandat.
+                    Ich akzeptiere die <a href="datenschutz.html" style="color: var(--green);">Datenschutzbestimmungen</a> und erteile das SEPA-Lastschriftmandat.
                 </label>
             </div>
             
             <button type="submit" class="btn-submit">Antrag jetzt sicher absenden</button>
         </form>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px;">
+        <div class="donation-split">
             <div class="qr-area">
                 <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
                 <a href="https://www.paypal.com/donate/?hosted_button_id=DEIN_CODE" target="_blank" class="qr-code-link">
@@ -139,7 +179,8 @@
             </div>
             <div>
                 <h4 style="color:var(--green);">Ansprechpartner</h4>
-                <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>foerderverein@kita-mehren.de</p>
+                <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>
+                <i class="fas fa-envelope"></i> foerderverein@kita-mehren.de</p>
             </div>
         </div>
     </div>
@@ -158,8 +199,8 @@
         <div>
             <h4>Rechtliches</h4>
             <p>
-                <a href="impressum.html" style="color: white;">Impressum</a> | 
-                <a href="datenschutz.html" style="color: white;">Datenschutz</a><br>
+                <a href="impressum.html">Impressum</a> | 
+                <a href="datenschutz.html">Datenschutz</a><br>
                 AG Montabaur | VR 22056
             </p>
         </div>
@@ -168,6 +209,7 @@
 </footer>
 
 <script>
+    // Zähler Animation
     const counters = document.querySelectorAll('.count');
     const observer = new IntersectionObserver(entries => {
         if(entries[0].isIntersecting) {
@@ -181,9 +223,24 @@
             });
         }
     }, { threshold: 0.5 });
-    observer.observe(document.querySelector('.stats'));
+    if(document.querySelector('.stats')) observer.observe(document.querySelector('.stats'));
 
-    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+    // Lightbox
+    function openLightbox(src) { 
+        document.getElementById('lightbox-img').src = src; 
+        document.getElementById('lightbox').style.display = 'flex'; 
+    }
+
+    // Netlify Identity Login-Redirect
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
 </script>
 </body>
 </html>
