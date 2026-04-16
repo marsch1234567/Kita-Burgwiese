@@ -73,39 +73,72 @@
 
 <section id="mitglied">
     <div class="form-container">
-        <form action="https://formspree.io/f/foerderverein@kita-mehren.de" method="POST">
-            <h3 style="color:var(--green); margin-top:0;">Mitgliedsantrag</h3>
+        <form action="https://formspree.io/f/mnjljdqq" method="POST">
+            <h3 style="color:var(--green); margin-top:0;">Mitgliedsantrag online</h3>
+            
+            <input type="text" name="_gotcha" style="display:none">
             <input type="hidden" name="_subject" value="Neuer Mitgliedsantrag: Kita Burgwiese">
-            <input type="text" name="Name" placeholder="Vollständiger Name" required>
-            <input type="text" name="Strasse" placeholder="Straße und Hausnummer" required>
+
+            <div class="form-group">
+                <label>Vollständiger Name</label>
+                <input type="text" name="Name" placeholder="Vorname Nachname" required>
+            </div>
+
+            <div class="form-group">
+                <label>Straße und Hausnummer</label>
+                <input type="text" name="Strasse" placeholder="Musterstraße 1" required>
+            </div>
+            
             <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
-                <input type="text" name="PLZ" value="57635" required>
-                <input type="text" name="Ort" value="Mehren" required>
+                <div class="form-group">
+                    <label>PLZ</label>
+                    <input type="text" name="PLZ" value="57635" required>
+                </div>
+                <div class="form-group">
+                    <label>Ort</label>
+                    <input type="text" name="Ort" value="Mehren" required>
+                </div>
             </div>
-            <input type="email" name="_replyto" placeholder="E-Mail Adresse" required>
-            <select name="Beitrag">
-                <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)</option>
-                <option value="Basis (12€)">Basismitglied (12 € / Jahr)</option>
-                <option value="Premium (50€)">Premium (50 € / Jahr)</option>
-                <option value="Wunsch">Wunschbetrag</option>
-            </select>
-            <input type="text" name="IBAN" placeholder="IBAN für Lastschrift" required style="border: 2px solid var(--green);">
-            <div style="font-size: 0.8rem; margin: 15px 0;">
-                <label><input type="checkbox" required> Ich akzeptiere die <a href="datenschutz.html" target="_blank">Datenschutzbestimmungen</a> und erteile das SEPA-Lastschriftmandat.</label>
+
+            <div class="form-group">
+                <label>E-Mail Adresse</label>
+                <input type="email" name="_replyto" placeholder="beispiel@mail.de" required>
             </div>
-            <button type="submit" class="btn-submit">Antrag sicher senden</button>
+
+            <div class="form-group">
+                <label>Gewünschter Jahresbeitrag</label>
+                <select name="Beitrag">
+                    <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)</option>
+                    <option value="Basis (12€)">Basismitglied (12 € / Jahr)</option>
+                    <option value="Premium (50€)">Premium (50 € / Jahr)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>IBAN (für Lastschriftmandat)</label>
+                <input type="text" name="IBAN" placeholder="DE..." required style="border: 2px solid var(--green);">
+            </div>
+
+            <div style="font-size: 0.8rem; margin: 20px 0;">
+                <label>
+                    <input type="checkbox" name="Zustimmung_Datenschutz" required> 
+                    Ich akzeptiere die <a href="datenschutz.html">Datenschutzbestimmungen</a> und erteile das SEPA-Lastschriftmandat.
+                </label>
+            </div>
+            
+            <button type="submit" class="btn-submit">Antrag jetzt sicher absenden</button>
         </form>
 
-        <div class="donation-split">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px;">
             <div class="qr-area">
-                <h4 style="color:var(--green);">PayPal Spende</h4>
-                <a href="https://www.paypal.com/donate/?hosted_button_id=2XPH5D88GNGRY&source=qr" target="_blank" class="qr-code-link">
-                    <img src="qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
+                <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=DEIN_CODE" target="_blank" class="qr-code-link">
+                    <img src="bilder/qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
                     <p style="font-size: 0.7rem; color: #666; margin-top: 5px;">Hier klicken oder scannen</p>
                 </a>
             </div>
             <div>
-                <h4 style="color:var(--green);">Kontakt</h4>
+                <h4 style="color:var(--green);">Ansprechpartner</h4>
                 <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>foerderverein@kita-mehren.de</p>
             </div>
         </div>
