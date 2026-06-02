@@ -3,17 +3,17 @@ const projekteDaten = [
     {
         titel: "Tonwanne",
         beschreibung: "Haptisches Erleben und kreatives Gestalten fördern.",
-        bild: "bilder/tonwanne.png"
+        bild: "images/tonwanne.png"
     },
     {
         titel: "KiTa Cup 2026",
         beschreibung: "Das Training läuft – wir sind voller Vorfreude dabei!",
-        bild: "bilder/fussball.png"
+        bild: "images/fussball.png"
     },
     {
         titel: "Fußballtrikots im Anflug!",
         beschreibung: "Dank der großzügigen Unterstützung vom Ambulanten Pflegedienst BAERenstark sind die neuen Trikots von JAKO bald da!",
-        bild: "bilder/Trikots.png"
+        bild: "images/Trikots.png"
     }
 ];
 
