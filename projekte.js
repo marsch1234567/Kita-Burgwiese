@@ -3,27 +3,18 @@ const projekteDaten = [
     {
         titel: "Tonwanne",
         beschreibung: "Haptisches Erleben und kreatives Gestalten fördern.",
-        bild: "images/tonwanne.png"
+        bild: "bilder/tonwanne.png"
     },
     {
         titel: "KiTa Cup 2026",
         beschreibung: "Das Training läuft – wir sind voller Vorfreude dabei!",
-        bild: "images/fussball.png"
-    },
-    {
-        titel: "Zukunft gestalten",
-        beschreibung: "Gemeinsam den Kita-Alltag moderner und bunter machen.",
-        bild: "images/2.jpeg"
+        bild: "bilder/fussball.png"
     },
     {
         titel: "Fußballtrikots im Anflug!",
-        beschreibung: "Große Ereignisse werfen ihre Schatten voraus – oder in diesem Fall: ihre Trikots! Wir freuen uns riesig, ankündigen zu dürfen, dass die Kids der Kindertagesstätte Burgwiese  bald in neuem Glanz auf dem Spielfeld stehen werden.Dank der großzügigen Unterstützung vom Ambulanten Pflegedienst BAERenstark  sind die neuen Fußballtrikots bereits auf dem Weg zu uns. Die Vorfreude im Team ist riesig, und wir können es kaum erwarten, die kleinen Nachwuchskicker in ihrem neuen Outfit von JAKO  flitzen zu sehen.Ein herzliches Dankeschön an das Team von BAERenstark, das dieses Projekt möglich gemacht hat! Wir halten euch auf dem Laufenden, sobald die Trikots gelandet sind und das erste Training darin startet.Bleibt sportlich!",
-        bild: "images/trikots.png"
-    },
-    // Wenn 
-    
-    // Wenn du ein neues Projekt willst, kopiere einfach die Zeilen oben 
-    // und füge sie hier untereinander ein.
+        beschreibung: "Dank der großzügigen Unterstützung vom Ambulanten Pflegedienst BAERenstark sind die neuen Trikots von JAKO bald da!",
+        bild: "bilder/Trikots.png"
+    }
 ];
 
 // Diese Funktion baut die Projekte automatisch in die Webseite ein
