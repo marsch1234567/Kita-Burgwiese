@@ -13,7 +13,7 @@ const projekteDaten = [
     {
         titel: "Fußballtrikots im Anflug!",
         beschreibung: "Dank der großzügigen Unterstützung vom Ambulanten Pflegedienst BAERenstark sind die neuen Trikots von JAKO bald da!",
-        bild: "images/Trikots.png"
+        bild: "images/trikots.png"
     }
 ];
 
