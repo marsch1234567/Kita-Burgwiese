@@ -1,10 +1,11 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Förderverein Kita Burgwiese Mehren e.V.</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Scripte und Icons -->
     <script src="projekte.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -23,9 +24,19 @@
         .nav-links a:hover { color: var(--green); }
         .btn-nav { background: var(--orange); color: white !important; border-radius: 25px; }
 
-        /* Hero mit korrektem Bildpfad */
-        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('images/Kitahaupt.jpeg'); background-size: cover; background-position: center; color: white; padding: 80px 10%; text-align: center; }
+        /* Hero */
+        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('bilder/fussball.png'); background-size: cover; background-position: center; color: white; padding: 80px 10%; text-align: center; }
         
+        /* Sommerfest & Flyer Sektion */
+        .event-section { background: white; padding: 60px 10%; text-align: center; }
+        .event-container { max-width: 850px; margin: 0 auto; background: var(--light); padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 6px solid var(--orange); }
+        .event-img { width: 100%; max-width: 500px; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .event-img:hover { transform: scale(1.02); }
+        .flyer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .flyer-box { background: white; padding: 12px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .flyer-box img { width: 100%; height: auto; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .flyer-box img:hover { transform: scale(1.02); }
+
         /* Statistik-Zähler */
         .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 40px; text-align: center; flex-wrap: wrap; }
         .stat-item { padding: 10px; min-width: 150px; }
@@ -46,6 +57,8 @@
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
         .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; }
         .btn-submit:hover { background: #d68300; }
+        .btn-download { background: var(--green); color: white; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; display: inline-block; transition: 0.3s; margin-top: 10px; }
+        .btn-download:hover { background: #216431; }
 
         /* PayPal & Kontakt */
         .donation-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px; }
@@ -64,7 +77,7 @@
         #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
         #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
 
-        /* MOBILE ANPASSUNGEN (Wichtig!) */
+        /* Mobile Anpassung */
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px; text-align: center; }
             .logo-area { margin-bottom: 15px; }
@@ -74,7 +87,8 @@
             .btn-nav { background: var(--orange) !important; color: white !important; }
             .stats { padding: 30px 5%; }
             .stat-item span { font-size: 2.5rem; }
-            section { padding: 40px 5%; }
+            section, .event-section { padding: 40px 5%; }
+            .event-img { max-width: 100%; }
         }
     </style>
 </head>
@@ -84,10 +98,11 @@
 
 <nav>
     <a href="index.html" class="logo-area">
-        <img src="images/logo.jpeg" alt="Logo">
+        <img src="bilder/logo.jpeg" alt="Logo">
         <span class="brand-name">Förderverein Kita<br>Burgwiese Mehren e.V.</span>
     </a>
     <div class="nav-links">
+        <a href="#sommerfest">Sommerfest 2026</a>
         <a href="#projekte">Projekte</a>
         <a href="sponsoren.html">Sponsoren</a>
         <a href="#mitglied" class="btn-nav">Beitreten</a>
@@ -99,6 +114,40 @@
     <p>Zur Burgwiese 1, 57635 Mehren</p>
 </section>
 
+<!-- Sommerfest-Ankündigung & Flyer-Anzeige -->
+<section id="sommerfest" class="event-section">
+    <div class="event-container">
+        <h2 style="color: var(--green); margin-top: 0; font-size: 2rem;">Einladung zum Sommerfest & Gründung</h2>
+        <p>Große Ereignisse werfen ihre Schatten voraus! Feiert mit uns am <strong>Samstag, den 20. Juni 2026 von 11:00 bis 16:00 Uhr</strong> auf dem Kitagelände[cite: 3]. Für das leibliche Wohl und jede Menge Spaß (Hüpfburg, Slush-Eis, Waffeln u.v.m.) ist gesorgt![cite: 3]</p>
+        
+        <!-- Sommerfest Plakat -->
+        <img src="bilder/Sommerfest2026.jpeg" alt="Einladung Sommerfest Kita Burgwiese 20. Juni 2026" class="event-img" onclick="openLightbox(this.src)">
+        <p style="font-size: 0.85rem; color: #666; margin-top: 10px; margin-bottom: 40px;"><i class="fas fa-search-plus"></i> Für Großansicht auf das Plakat klicken[cite: 3]</p>
+        
+        <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
+
+        <!-- Informationsflyer (Vorder- & Rückseite direkt sichtbar) -->
+        <h3 style="color: var(--green); font-size: 1.6rem; margin-bottom: 20px;">Unser Informationsflyer</h3>
+        <p style="margin-bottom: 30px;">Hier kannst du direkt durch unseren aktuellen Info-Flyer blättern[cite: 3]:</p>
+        
+        <div class="flyer-grid">
+            <div class="flyer-box">
+                <img src="bilder/Flyer1.jpg" alt="Flyer Seite 1 - Förderverein" onclick="openLightbox(this.src)">
+                <p style="font-size: 0.8rem; color: #777; margin: 8px 0 0 0;">Flyer-Außenseite (Klick für Großansicht)[cite: 3]</p>
+            </div>
+            <div class="flyer-box">
+                <img src="bilder/Flyer2.jpg" alt="Flyer Seite 2 - Beitrittserklärung" onclick="openLightbox(this.src)">
+                <p style="font-size: 0.8rem; color: #777; margin: 8px 0 0 0;">Flyer-Innenseite (Klick für Großansicht)[cite: 3]</p>
+            </div>
+        </div>
+        
+        <!-- PDF Download-Button für das Gesamtpaket -->
+        <a href="Flyer Förderverein Kita_20260529_203214_0000_2.pdf" download class="btn-download">
+            <i class="fas fa-file-pdf"></i> Flyer als PDF herunterladen (Druckversion)[cite: 3]
+        </a>
+    </div>
+</section>
+
 <div class="stats">
     <div class="stat-item"><span class="count" data-target="7">0</span>Mitglieder</div>
     <div class="stat-item"><span class="count" data-target="650">0</span>Spenden (€)</div>
@@ -108,7 +157,8 @@
 <section id="projekte">
     <h2 class="section-title">Unsere Projekte</h2>
     <div class="grid" id="projekte-grid">
-        </div>
+        <!-- Geladen aus projekte.js -->
+    </div>
 </section>
 
 <section id="mitglied">
@@ -119,50 +169,31 @@
             <input type="text" name="_gotcha" style="display:none">
             <input type="hidden" name="_subject" value="Neuer Mitgliedsantrag: Kita Burgwiese">
 
-            <div class="form-group">
-                <label>Vollständiger Name</label>
-                <input type="text" name="Name" placeholder="Vorname Nachname" required>
-            </div>
-
-            <div class="form-group">
-                <label>Straße und Hausnummer</label>
-                <input type="text" name="Strasse" placeholder="Musterstraße 1" required>
-            </div>
+            <div class="form-group"><label>Vollständiger Name</label><input type="text" name="Name" placeholder="Vorname Nachname" required></div>
+            <div class="form-group"><label>Straße und Hausnummer</label><input type="text" name="Strasse" placeholder="Musterstraße 1" required></div>
             
             <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
-                <div class="form-group">
-                    <label>PLZ</label>
-                    <input type="text" name="PLZ" value="57635" required>
-                </div>
-                <div class="form-group">
-                    <label>Ort</label>
-                    <input type="text" name="Ort" value="Mehren" required>
-                </div>
+                <div class="form-group"><label>PLZ</label><input type="text" name="PLZ" value="57635" required></div>
+                <div class="form-group"><label>Ort</label><input type="text" name="Ort" value="Mehren" required></div>
             </div>
 
-            <div class="form-group">
-                <label>E-Mail Adresse</label>
-                <input type="email" name="_replyto" placeholder="beispiel@mail.de" required>
-            </div>
+            <div class="form-group"><label>E-Mail Adresse</label><input type="email" name="_replyto" placeholder="beispiel@mail.de" required></div>
 
             <div class="form-group">
                 <label>Gewünschter Jahresbeitrag</label>
                 <select name="Beitrag">
-                    <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)</option>
-                    <option value="Basis (12€)">Basismitglied (12 € / Jahr)</option>
+                    <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)[cite: 1]</option>
+                    <option value="Basis (12€)">Basismitglied (12 € / Jahr)[cite: 1]</option>
                     <option value="Premium (50€)">Premium (50 € / Jahr)</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label>IBAN (für Lastschriftmandat)</label>
-                <input type="text" name="IBAN" placeholder="DE..." required style="border: 2px solid var(--green);">
-            </div>
+            <div class="form-group"><label>IBAN (für Lastschriftmandat)</label><input type="text" name="IBAN" placeholder="DE..." required style="border: 2px solid var(--green);"></div>
 
-            <div style="font-size: 0.8rem; margin: 20px 0;">
+            <div style="font-size: 0.85rem; margin: 20px 0;">
                 <label>
                     <input type="checkbox" name="Zustimmung_Datenschutz" required> 
-                    Ich akzeptiere die <a href="datenschutz.html" style="color: var(--green);">Datenschutzbestimmungen</a> und erteile das SEPA-Lastschriftmandat.
+                    Ich akzeptiere die <a href="datenschutz.html" style="color: var(--green);">Datenschutzbestimmungen</a>, erteile das SEPA-Lastschriftmandat und erkenne die <a href="Satzung_Foerderverein_Stand Feb26.pdf" download style="color: var(--green); font-weight: bold;"><i class="fas fa-file-pdf"></i> Vereinssatzung (Download)</a> an[cite: 1, 3].
                 </label>
             </div>
             
@@ -173,7 +204,7 @@
             <div class="qr-area">
                 <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
                 <a href="https://www.paypal.com/donate/?hosted_button_id=DEIN_CODE" target="_blank" class="qr-code-link">
-                    <img src="images/qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
+                    <img src="bilder/qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
                     <p style="font-size: 0.7rem; color: #666; margin-top: 5px;">Hier klicken oder scannen</p>
                 </a>
             </div>
@@ -190,18 +221,19 @@
     <div class="footer-grid">
         <div>
             <h4>Anschrift</h4>
-            <p>Förderverein Kita Burgwiese e.V.<br>Zur Burgwiese 1<br>57635 Mehren</p>
+            <p>Förderverein Kita Burgwiese e.V.<br>Zur Burgwiese 1<br>57635 Mehren[cite: 1, 2]</p>
         </div>
         <div>
             <h4>Finanzen</h4>
-            <p>Sparkasse Westerwald-Sieg<br>IBAN: DE18 5735 1030 0055 0944 94</p>
+            <p>Sparkasse Westerwald-Sieg<br>IBAN: DE18 5735 1030 0055 0944 94[cite: 1]</p>
         </div>
         <div>
             <h4>Rechtliches</h4>
             <p>
                 <a href="impressum.html">Impressum</a> | 
                 <a href="datenschutz.html">Datenschutz</a><br>
-                AG Montabaur | VR 22056
+                <a href="Satzung_Foerderverein_Stand Feb26.pdf" download><i class="fas fa-file-pdf"></i> Satzung herunterladen (PDF)</a><br>
+                AG Montabaur | VR 22056[cite: 1, 2]
             </p>
         </div>
     </div>
@@ -225,21 +257,10 @@
     }, { threshold: 0.5 });
     if(document.querySelector('.stats')) observer.observe(document.querySelector('.stats'));
 
-    // Lightbox
+    // Lightbox für Bild-Großansicht
     function openLightbox(src) { 
         document.getElementById('lightbox-img').src = src; 
         document.getElementById('lightbox').style.display = 'flex'; 
-    }
-
-    // Netlify Identity Login-Redirect
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
     }
 </script>
 </body>
