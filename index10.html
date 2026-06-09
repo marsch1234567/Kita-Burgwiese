@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Förderverein Kita Burgwiese Mehren e.V.</title>
+    
+    <!-- Scripte und Icons -->
+    <script src="projekte.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --green: #2d8a44; --orange: #f29400; --light: #f8f9fa; --dark: #2c3e50; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* Navigation - Desktop & Mobile Optimierung */
+        nav { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; text-decoration: none; }
+        .logo-area img { height: 80px; width: auto; margin-right: 15px; } 
+        .brand-name { color: var(--green); font-weight: bold; font-size: 1.3rem; line-height: 1.2; }
+
+        .nav-links { display: flex; align-items: center; gap: 15px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; padding: 8px 15px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--green); }
+        .btn-nav { background: var(--orange); color: white !important; border-radius: 25px; }
+
+        /* Hero - Pfad angepasst auf images/ */
+        .hero { background: linear-gradient(rgba(45,138,68,0.85), rgba(45,138,68,0.7)), url('images/fussball.png'); background-size: cover; background-position: center; color: white; padding: 80px 10%; text-align: center; }
+        
+        /* Sommerfest & Flyer Sektion */
+        .event-section { background: white; padding: 60px 10%; text-align: center; }
+        .event-container { max-width: 850px; margin: 0 auto; background: var(--light); padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 6px solid var(--orange); }
+        .event-img { width: 100%; max-width: 500px; height: auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .event-img:hover { transform: scale(1.02); }
+        .flyer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .flyer-box { background: white; padding: 12px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .flyer-box img { width: 100%; height: auto; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .flyer-box img:hover { transform: scale(1.02); }
+
+        /* Statistik-Zähler */
+        .stats { background: var(--orange); color: white; display: flex; justify-content: space-around; padding: 40px; text-align: center; flex-wrap: wrap; }
+        .stat-item { padding: 10px; min-width: 150px; }
+        .stat-item span { font-size: 3.5rem; font-weight: bold; display: block; line-height: 1; }
+
+        /* Sektionen & Grid */
+        section { padding: 60px 10%; }
+        .section-title { text-align: center; color: var(--green); font-size: 2.2rem; margin-bottom: 40px; position: relative; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 25px; text-align: center; border-top: 6px solid var(--green); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; border-radius: 10px; height: 200px; object-fit: cover; cursor: pointer; }
+
+        /* Formular */
+        .form-container { background: var(--light); padding: 30px; border-radius: 30px; max-width: 800px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        .btn-submit { background: var(--orange); color: white; padding: 18px; border-radius: 50px; border: none; font-weight: bold; width: 100%; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #d68300; }
+        .btn-download { background: var(--green); color: white; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; display: inline-block; transition: 0.3s; margin-top: 10px; }
+        .btn-download:hover { background: #216431; }
+
+        /* PayPal & Kontakt */
+        .donation-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 30px; }
+        .qr-area { text-align: center; }
+        .qr-code-link { display: inline-block; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 160px; transition: 0.3s; text-decoration: none; }
+        .qr-code-link:hover { transform: scale(1.05); }
+
+        /* Footer */
+        footer { background: var(--dark); color: white; padding: 60px 10%; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px; text-align: center; opacity: 0.7; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Lightbox */
+        #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+
+        /* Mobile Anpassung */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 15px; text-align: center; }
+            .logo-area { margin-bottom: 15px; }
+            .logo-area img { height: 60px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-links a { font-size: 0.85rem; padding: 6px 12px; background: #f0f0f0; border-radius: 15px; margin-left: 0; }
+            .btn-nav { background: var(--orange) !important; color: white !important; }
+            .stats { padding: 30px 5%; }
+            .stat-item span { font-size: 2.5rem; }
+            section, .event-section { padding: 40px 5%; }
+            .event-img { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+
+<nav>
+    <a href="index.html" class="logo-area">
+        <!-- Pfad angepasst auf images/ -->
+        <img src="images/logo.jpeg" alt="Logo">
+        <span class="brand-name">Förderverein Kita<br>Burgwiese Mehren e.V.</span>
+    </a>
+    <div class="nav-links">
+        <a href="#sommerfest">Sommerfest 2026</a>
+        <a href="#projekte">Projekte</a>
+        <a href="sponsoren.html">Sponsoren</a>
+        <a href="#mitglied" class="btn-nav">Beitreten</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Für unsere Kinder in Mehren</h1>
+    <p>Zur Burgwiese 1, 57635 Mehren</p>
+</section>
+
+<!-- Sommerfest-Ankündigung & Flyer-Anzeige -->
+<section id="sommerfest" class="event-section">
+    <div class="event-container">
+        <h2 style="color: var(--green); margin-top: 0; font-size: 2rem;">Einladung zum Sommerfest & Gründung</h2>
+        <p>Große Ereignisse werfen ihre Schatten voraus! Feiert mit uns am <strong>Samstag, den 20. Juni 2026 von 11:00 bis 16:00 Uhr</strong> auf dem Kitagelände. Für das leibliche Wohl und jede Menge Spaß (Hüpfburg, Slush-Eis, Waffeln u.v.m.) ist gesorgt!</p>
+        
+        <!-- Sommerfest Plakat - Pfad angepasst auf images/ -->
+        <img src="images/Sommerfest2026.jpeg" alt="Einladung Sommerfest Kita Burgwiese 20. Juni 2026" class="event-img" onclick="openLightbox(this.src)">
+        <p style="font-size: 0.85rem; color: #666; margin-top: 10px; margin-bottom: 40px;"><i class="fas fa-search-plus"></i> Für Großansicht auf das Plakat klicken</p>
+        
+        <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
+
+        <!-- Informationsflyer (Vorder- & Rückseite) - Pfade angepasst auf images/ -->
+        <h3 style="color: var(--green); font-size: 1.6rem; margin-bottom: 20px;">Unser Informationsflyer</h3>
+        <p style="margin-bottom: 30px;">Hier kannst du direkt durch unseren aktuellen Info-Flyer blättern:</p>
+        
+        <div class="flyer-grid">
+            <div class="flyer-box">
+                <img src="images/Flyer1.jpg" alt="Flyer Seite 1 - Förderverein" onclick="openLightbox(this.src)">
+                <p style="font-size: 0.8rem; color: #777; margin: 8px 0 0 0;">Flyer-Außenseite (Klick für Großansicht)</p>
+            </div>
+            <div class="flyer-box">
+                <img src="images/Flyer2.jpg" alt="Flyer Seite 2 - Beitrittserklärung" onclick="openLightbox(this.src)">
+                <p style="font-size: 0.8rem; color: #777; margin: 8px 0 0 0;">Flyer-Innenseite (Klick für Großansicht)</p>
+            </div>
+        </div>
+        
+        <!-- PDF Download-Button -->
+        <a href="Flyer.pdf" download class="btn-download">
+            <i class="fas fa-file-pdf"></i> Flyer als PDF herunterladen (Druckversion)
+        </a>
+    </div>
+</section>
+
+<div class="stats">
+    <div class="stat-item"><span class="count" data-target="14">0</span>Mitglieder</div>
+    <div class="stat-item"><span class="count" data-target="650">0</span>Spenden (€)</div>
+    <div class="stat-item"><span class="count" data-target="4">0</span>Projekte</div>
+</div>
+
+<section id="projekte">
+    <h2 class="section-title">Unsere Projekte</h2>
+    <div class="grid" id="projekte-grid">
+        <!-- Geladen aus projekte.js -->
+    </div>
+</section>
+
+<section id="mitglied">
+    <div class="form-container">
+        <form action="https://formspree.io/f/mnjljdqq" method="POST">
+            <h3 style="color:var(--green); margin-top:0;">Mitgliedsantrag online</h3>
+            
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="_subject" value="Neuer Mitgliedsantrag: Kita Burgwiese">
+
+            <div class="form-group"><label>Vollständiger Name</label><input type="text" name="Name" placeholder="Vorname Nachname" required></div>
+            <div class="form-group"><label>Straße und Hausnummer</label><input type="text" name="Strasse" placeholder="Musterstraße 1" required></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
+                <div class="form-group"><label>PLZ</label><input type="text" name="PLZ" value="57635" required></div>
+                <div class="form-group"><label>Ort</label><input type="text" name="Ort" value="Mehren" required></div>
+            </div>
+
+            <div class="form-group"><label>E-Mail Adresse</label><input type="email" name="_replyto" placeholder="beispiel@mail.de" required></div>
+
+            <div class="form-group">
+                <label>Gewünschter Jahresbeitrag</label>
+                <select name="Beitrag">
+                    <option value="Förderer (24€)" selected>Förderer (24 € / Jahr)[cite: 1]</option>
+                    <option value="Basis (12€)">Basismitglied (12 € / Jahr)[cite: 1]</option>
+                    <option value="Premium (50€)">Premium (50 € / Jahr)</option>
+                </select>
+            </div>
+
+            <div class="form-group"><label>IBAN (für Lastschriftmandat)</label><input type="text" name="IBAN" placeholder="DE..." required style="border: 2px solid var(--green);"></div>
+
+            <div style="font-size: 0.85rem; margin: 20px 0;">
+                <label>
+                    <input type="checkbox" name="Zustimmung_Datenschutz" required> 
+                    Ich akzeptiere die <a href="datenschutz.html" style="color: var(--green);">Datenschutzbestimmungen</a>, erteile das SEPA-Lastschriftmandat und erkenne die <a href="Satzung_Foerderverein_Stand Feb26.pdf" download style="color: var(--green); font-weight: bold;"><i class="fas fa-file-pdf"></i> Vereinssatzung (Download)</a> an[cite: 1, 3].
+                </label>
+            </div>
+            
+            <button type="submit" class="btn-submit">Antrag jetzt sicher absenden</button>
+        </form>
+
+        <div class="donation-split">
+            <div class="qr-area">
+                <h4 style="color:var(--green);">PayPal Direkt-Spende</h4>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=DEIN_CODE" target="_blank" class="qr-code-link">
+                    <!-- Pfad angepasst auf images/ -->
+                    <img src="images/qr-paypal.png" alt="PayPal QR Code" style="width: 100%;">
+                    <p style="font-size: 0.7rem; color: #666; margin-top: 5px;">Hier klicken oder scannen</p>
+                </a>
+            </div>
+            <div>
+                <h4 style="color:var(--green);">Ansprechpartner</h4>
+                <p><strong>Benjamin Strehl</strong><br>1. Vorsitzender<br>
+                <i class="fas fa-envelope"></i> foerderverein@kita-mehren.de</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h4>Anschrift</h4>
+            <p>Förderverein Kita Burgwiese e.V.<br>Zur Burgwiese 1<br>57635 Mehren[cite: 1, 2]</p>
+        </div>
+        <div>
+            <h4>Finanzen</h4>
+            <p>Sparkasse Westerwald-Sieg<br>IBAN: DE18 5735 1030 0055 0944 94[cite: 1]</p>
+        </div>
+        <div>
+            <h4>Rechtliches</h4>
+            <p>
+                <a href="impressum.html">Impressum</a> | 
+                <a href="datenschutz.html">Datenschutz</a><br>
+                <a href="Satzung.pdf" download><i class="fas fa-file-pdf"></i> Satzung herunterladen (PDF)</a><br>
+                AG Montabaur | VR 22056[cite: 1, 2]
+            </p>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Förderverein Kita Burgwiese Mehren e.V.</div>
+</footer>
+
+<script>
+    // HIER DEINEN KOPIERTEN GOOGLE-SHEETS-LINK EINTRAGEN:
+    const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSc8gqlQxfYPScOxrKW-SkXzCkP63G2v4c6YjbixDrdd3Ag-hS20nGCO7geM_dkD48o8P_hHxzp8YYe/pub?gid=0&single=true&output=csv";
+
+    // Funktion, um die Daten live aus Google Sheets zu laden
+    async function fetchLiveStats() {
+        try {
+            const response = await fetch(SHEETS_CSV_URL);
+            if (!response.ok) throw new Error("Netzwerkfehler beim Laden der Stats");
+            
+            const csvText = await response.text();
+            // Zeilen der CSV-Datei aufteilen
+            const rows = csvText.split('\n').map(row => row.trim());
+
+            // Die Zahlen aus den ersten drei Zeilen extrahieren
+            const mitglieder = parseInt(rows[0]) || 0;
+            const spenden = parseInt(rows[1]) || 0;
+            const projekte = parseInt(rows[2]) || 0;
+
+            // Die HTML-Elemente mit den neuen Zielwerten füttern
+            const counterElements = document.querySelectorAll('.count');
+            if (counterElements.length >= 3) {
+                counterElements[0].setAttribute('data-target', mitglieder);
+                counterElements[1].setAttribute('data-target', spenden);
+                counterElements[2].setAttribute('data-target', projekte);
+            }
+
+            // Erst wenn die Daten da sind, starten wir den Beobachter für die Animation
+            startCounterObserver();
+
+        } catch (error) {
+            console.error("Stats konnten nicht geladen werden, nutze Fallback-Werte aus dem HTML:", error);
+            // Falls Google Sheets offline ist, starten wir die Animation einfach mit den Standardwerten
+            startCounterObserver();
+        }
+    }
+
+    // Funktion für die Zähler-Animation
+    function startCounterObserver() {
+        const counters = document.querySelectorAll('.count');
+        const observer = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting) {
+                counters.forEach(c => {
+                    const update = () => {
+                        const target = +c.getAttribute('data-target');
+                        const val = +c.innerText;
+                        if(val < target) { 
+                            c.innerText = Math.ceil(val + target/50); 
+                            setTimeout(update, 30); 
+                        } else { 
+                            c.innerText = target; 
+                        }
+                    };
+                    update();
+                });
+                // Animation nur einmal ausführen
+                observer.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats');
+        if(statsSection) observer.observe(statsSection);
+    }
+
+    // Lightbox für Bild-Großansicht
+    function openLightbox(src) { 
+        document.getElementById('lightbox-img').src = src; 
+        document.getElementById('lightbox').style.display = 'flex'; 
+    }
+
+    // Beim Laden der Seite sofort die Live-Daten abfragen
+    document.addEventListener('DOMContentLoaded', fetchLiveStats);
+</script>
+</body>
+</html>
