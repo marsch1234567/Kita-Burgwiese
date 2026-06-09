@@ -243,27 +243,77 @@
 </footer>
 
 <script>
-    // Zähler Animation
-    const counters = document.querySelectorAll('.count');
-    const observer = new IntersectionObserver(entries => {
-        if(entries[0].isIntersecting) {
-            counters.forEach(c => {
-                const update = () => {
-                    const target = +c.getAttribute('data-target');
-                    const val = +c.innerText;
-                    if(val < target) { c.innerText = Math.ceil(val + target/50); setTimeout(update, 30); } else { c.innerText = target; }
-                };
-                update();
-            });
+    // HIER DEINEN KOPIERTEN GOOGLE-SHEETS-LINK EINTRAGEN:
+    const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSc8gqlQxfYPScOxrKW-SkXzCkP63G2v4c6YjbixDrdd3Ag-hS20nGCO7geM_dkD48o8P_hHxzp8YYe/pub?gid=0&single=true&output=csv";
+
+    // Funktion, um die Daten live aus Google Sheets zu laden
+    async function fetchLiveStats() {
+        try {
+            const response = await fetch(SHEETS_CSV_URL);
+            if (!response.ok) throw new Error("Netzwerkfehler beim Laden der Stats");
+            
+            const csvText = await response.text();
+            // Zeilen der CSV-Datei aufteilen
+            const rows = csvText.split('\n').map(row => row.trim());
+
+            // Die Zahlen aus den ersten drei Zeilen extrahieren
+            const mitglieder = parseInt(rows[0]) || 0;
+            const spenden = parseInt(rows[1]) || 0;
+            const projekte = parseInt(rows[2]) || 0;
+
+            // Die HTML-Elemente mit den neuen Zielwerten füttern
+            const counterElements = document.querySelectorAll('.count');
+            if (counterElements.length >= 3) {
+                counterElements[0].setAttribute('data-target', mitglieder);
+                counterElements[1].setAttribute('data-target', spenden);
+                counterElements[2].setAttribute('data-target', projekte);
+            }
+
+            // Erst wenn die Daten da sind, starten wir den Beobachter für die Animation
+            startCounterObserver();
+
+        } catch (error) {
+            console.error("Stats konnten nicht geladen werden, nutze Fallback-Werte aus dem HTML:", error);
+            // Falls Google Sheets offline ist, starten wir die Animation einfach mit den Standardwerten
+            startCounterObserver();
         }
-    }, { threshold: 0.5 });
-    if(document.querySelector('.stats')) observer.observe(document.querySelector('.stats'));
+    }
+
+    // Funktion für die Zähler-Animation
+    function startCounterObserver() {
+        const counters = document.querySelectorAll('.count');
+        const observer = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting) {
+                counters.forEach(c => {
+                    const update = () => {
+                        const target = +c.getAttribute('data-target');
+                        const val = +c.innerText;
+                        if(val < target) { 
+                            c.innerText = Math.ceil(val + target/50); 
+                            setTimeout(update, 30); 
+                        } else { 
+                            c.innerText = target; 
+                        }
+                    };
+                    update();
+                });
+                // Animation nur einmal ausführen
+                observer.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats');
+        if(statsSection) observer.observe(statsSection);
+    }
 
     // Lightbox für Bild-Großansicht
     function openLightbox(src) { 
         document.getElementById('lightbox-img').src = src; 
         document.getElementById('lightbox').style.display = 'flex'; 
     }
+
+    // Beim Laden der Seite sofort die Live-Daten abfragen
+    document.addEventListener('DOMContentLoaded', fetchLiveStats);
 </script>
 </body>
 </html>
